@@ -8,50 +8,57 @@ function random(min, max)
 function getComputerChoice() 
 {   
     let choices = ["rock", "paper", "scissor"];
-    return choices[random(0,3)];
+    let ch = random(0,2);
+    console.log(ch);
+    return choices[ch];
 }
 
-function playRound(playerSelection, computerSelection)
+function playRound(e)
 {   
     /* 
     returns 1 if player one(human) is winner 
     returns 2 if player two(computer) is winner 
     and 0 if it is a draw
     */
+    let computerSelection = getComputerChoice();
+    let playerSelection = e.target.dataset["key"];
+
+    console.log(e.target.dataset["key"]);
+    console.log(playerSelection, computerSelection);
+
     if (playerSelection == "rock")
     {
         if (computerSelection == "scissor")
         {
-            return 1;
+            playerScore.textContent = parseInt(playerScore.textContent) + 1;
         }
         else if (computerSelection == "paper")
         {
-            return 2;
+            computerScore.textContent = parseInt(computerScore.textContent) + 1;
         }
     }
     else if (playerSelection == "paper")
     {
         if (computerSelection == "rock")
         {
-            return 1;
+            playerScore.textContent = parseInt(playerScore.textContent) + 1;
         }
         else if (computerSelection == "scissor")
         {
-            return 2;
+            computerScore.textContent = parseInt(computerScore.textContent) + 1;
         }
     }
     else if (playerSelection == "scissor")
     {
         if (computerSelection == "paper")
         {
-            return 1;
+            playerScore.textContent = parseInt(playerScore.textContent) + 1;
         }
         else if (computerSelection == "rock")
         {
-            return 2;
+            computerScore.textContent = parseInt(computerScore.textContent) + 1;
         }
     }
-    return 0;
 
 }
 
@@ -94,3 +101,8 @@ function game() {
         }
     }
 }
+
+const btns = document.querySelectorAll(".btn");
+const playerScore = document.querySelector("#player"); 
+const computerScore = document.querySelector("#computer")
+btns.forEach(btn => btn.addEventListener("click", playRound));

@@ -22,9 +22,20 @@ function playRound(e)
     let computerSelection = getComputerChoice();
     let playerSelection = e.target.dataset["key"];
 
+
+    //display the current choices made player player and computer
+    const choiceEmoji = {
+        rock : "✊",
+        paper : "🖐️",
+        scissor : "✌️"
+    };
+    document.querySelector("#hChoice").textContent = choiceEmoji[playerSelection];
+    document.querySelector("#cmpChoice").textContent = choiceEmoji[computerSelection];
+
     let round_winner = winner(playerSelection, computerSelection);
     
     const winnerDisp = document.querySelector("#winnerDisplay");
+    winnerDisp.textContent = "";
 
     if (round_winner == 1) {
         const playerScore = document.querySelector("#player");
@@ -37,20 +48,24 @@ function playRound(e)
     //updating the rounds
     rounds += 1;
     const rounds_num = document.querySelector("#rounds");
-    rounds_num.textContent = parseInt(rounds_num.textContent) + 1;
-    console.log(rounds);
+    rounds_num.textContent = rounds;
 
     if (rounds == 5) {
         rounds = 0;
-        const playerScore = parseInt(document.querySelector("#player"));
-        const computerScore = parseInt(document.querySelector("#computer"));
+        const playerScore = parseInt(document.querySelector("#player").textContent);
+        const computerScore = parseInt(document.querySelector("#computer").textContent);
         if (playerScore > computerScore) {
             winnerDisp.textContent = "humans are victorious...!";
         } else if (computerScore > playerScore) {
-            winnerDisp.textContent = "computer have taken over the world..!";
+            winnerDisp.textContent = "computers have taken over the world..!";
         } else {
             winnerDisp.textContent = "i foresee another war";
         }
+
+        //reset the player scores to zero
+        document.querySelector("#player").textContent = 0;
+        document.querySelector("#computer").textContent = 0;
+        rounds_num.textContent = rounds;
     }
 
 }

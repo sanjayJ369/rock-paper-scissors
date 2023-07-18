@@ -49,11 +49,11 @@ function playRound(e)
     rounds += 1;
     const rounds_num = document.querySelector("#rounds");
     rounds_num.textContent = rounds;
+    const playerScore = parseInt(document.querySelector("#player").textContent);
+    const computerScore = parseInt(document.querySelector("#computer").textContent);
 
-    if (rounds == 5) {
+    if (playerScore == 5 || computerScore == 5) {
         rounds = 0;
-        const playerScore = parseInt(document.querySelector("#player").textContent);
-        const computerScore = parseInt(document.querySelector("#computer").textContent);
         if (playerScore > computerScore) {
             winnerDisp.textContent = "humans are victorious...!";
         } else if (computerScore > playerScore) {
